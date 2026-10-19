@@ -13,8 +13,7 @@ def extract_text_from_pdf(pdf_path: str) -> str:
 
 if __name__ == "__main__":
     # Ensure Ollama is running locally before executing
-    pipeline = ChangeOrderExtractor(model_name="llama3")
-    
+    pipeline = ChangeOrderExtractor(model_name="qwen2:0.5b")    
     # Example raw text (In production, you'd pass the extract_text_from_pdf output)
     sample_text = """
     CHANGE ORDER #104

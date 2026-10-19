@@ -1,9 +1,13 @@
 import json
 import logging
-from langchain.prompts import PromptTemplate
-from langchain_community.llms import Ollama
-from langchain.output_parsers import PydanticOutputParser
+from langchain_core.prompts import PromptTemplate
+from langchain_ollama import OllamaLLM
+from langchain_core.output_parsers import PydanticOutputParser
 from src.schema import ChangeOrderOutput
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+# ... (leave the rest of the code exactly the same)
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -13,8 +17,7 @@ class ChangeOrderExtractor:
         """
         Initializes the extractor using a local LLM via Ollama for zero-cost, secure inference.
         """
-        self.llm = Ollama(model=model_name, temperature=0.0)
-        self.parser = PydanticOutputParser(pydantic_object=ChangeOrderOutput)
+        self.llm = OllamaLLM(model=model_name, temperature=0.0)        self.parser = PydanticOutputParser(pydantic_object=ChangeOrderOutput)
         
         self.prompt = PromptTemplate(
             template="You are an expert data extraction algorithm reading construction change orders.\n"
