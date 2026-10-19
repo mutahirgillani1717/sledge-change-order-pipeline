@@ -17,7 +17,8 @@ class ChangeOrderExtractor:
         """
         Initializes the extractor using a local LLM via Ollama for zero-cost, secure inference.
         """
-        self.llm = OllamaLLM(model=model_name, temperature=0.0)        self.parser = PydanticOutputParser(pydantic_object=ChangeOrderOutput)
+        self.llm = OllamaLLM(model=model_name, temperature=0.0)       
+        self.parser = PydanticOutputParser(pydantic_object=ChangeOrderOutput)
         
         self.prompt = PromptTemplate(
             template="You are an expert data extraction algorithm reading construction change orders.\n"
